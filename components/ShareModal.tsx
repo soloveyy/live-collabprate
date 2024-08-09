@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState} from 'react';
-import { useSelf } from "@liveblocks/react";
+import { useSelf } from "@liveblocks/react/suspense";
 
 import {
     Dialog,
@@ -30,7 +30,14 @@ const ShareModal = ({ roomId, collaborators, creatorId, currentUserType }: Share
 
     const shareDocHabdler = async () => {
         setLoading(true);
-        await updateDocumentAcceess({ roomId, email, userType: userType as UserType, updatedBy: user.info });
+
+        await updateDocumentAcceess({
+            roomId,
+            email,
+            userType: userType as UserType,
+            updatedBy: user.info
+        });
+
         setLoading(false);
     }
 
